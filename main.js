@@ -114,14 +114,16 @@ closeBtn.addEventListener('click', () => {
 });
 
 
-const bgMusic = new Audio('ancient-egypt-music.mp3');
+const bgMusic = new Audio('ancient_egypt_music.mp3');
 bgMusic.loop = true;
 bgMusic.volume = 0.5;
 
 let musicStarted = false;
 function startMusic() {
     if (!musicStarted) {
-        bgMusic.play();
+        bgMusic.play().catch((error) => {
+            console.error('Music failed to play', error)
+        });
         musicStarted = true;
     }
 }
