@@ -1,4 +1,5 @@
-import * as THREE from 'https://unpkg.com/three@0.160.0/build/three.module.js'
+import * as THREE from 'https://unpkg.com/three@0.160.0/build/three.module.js';
+import {OrbitControls} from 'https://unpkg.com/three@0.160.0/examples/jsm/controls/OrbitControls.js';
 
 const scene = new THREE.Scene();
 
@@ -54,8 +55,17 @@ const land = new THREE.Mesh(landgeometry, landmaterial);
 land.rotation.x = -Math.PI / 2;
 scene.add(land);
 
+const control = new OrbitControls(camera, renderer.domElement);
+control.enableDamping = true;
+control.dampingFactor = 0.05;
+control.minDistance = 5;
+control.maxDistance = 40;
+control.maxPolarAngle = Math.PI / 2 - 0.05;
+
+
 function animate() {
     requestAnimationFrame(animate);
+    control.update();
     renderer.render(scene, camera);
 
 }
