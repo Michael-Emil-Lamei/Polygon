@@ -39,7 +39,7 @@ scene.add(menkaure);
 const ambientlight = new THREE.AmbientLight(0xffffff, 0.4);
 scene.add(ambientlight);
 
-const sunlight = new THREE.Directionallight(0xfff2d9, 1.2);
+const sunlight = new THREE.DirectionalLight(0xfff2d9, 1.2);
 sunlight.position.set(10, 15, 10);
 scene.add(sunlight);
 
@@ -49,8 +49,8 @@ sandtexture.wrapS = THREE.RepeatWrapping;
 sandtexture.wrapT = THREE.RepeatWrapping;
 sandtexture.repeat.set(10, 10);
 
-const groundgeometry = new THREE.GroundGeometry(60, 60);
-const groundmaterial = new THREE.GroundMaterial({ map: sandtexture });
+const groundgeometry = new THREE.PlaneGeometry(60, 60);
+const groundmaterial = new THREE.MeshStandardMaterial({ map: sandtexture });
 const ground = new THREE.Mesh(groundgeometry, groundmaterial);
 ground.rotation.x = -Math.PI / 2;
 scene.add(ground);
@@ -86,7 +86,7 @@ const clickablePyramids = [khufu, khafre, menkaure];
 
 window.addEventListener('click', (event) => {
 mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
-mouse.y = (event.clientY / window.innerHeight) * 2 + 1;
+mouse.y = -(event.clientY / window.innerHeight) * 2 + 1;
 raycaster.setFromCamera(mouse, camera);
 const intersects = raycaster.intersectObjects(clickablePyramids);
 
@@ -112,6 +112,21 @@ function showInfoPanel(data) {
 closeBtn.addEventListener('click', () => {
     infoPanel.classList.add('hidden');
 });
+
+
+const bgMusic = new Audio('ancient-egypt-music.mp3');
+bgMusic.loop = true;
+bgMusic.volume = 0.5;
+
+let musicStarted = false;
+function startMusic() {
+    if (!musicStarted) {
+        bgMusic.play();
+        musicStarted = true;
+    }
+}
+
+window.addEventListener('click', startMusic, {once: true});
 
 
 
