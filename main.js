@@ -62,6 +62,60 @@ control.minDistance = 5;
 control.maxDistance = 40;
 control.maxPolarAngle = Math.PI / 2 - 0.05;
 
+khufu.name = 'Khufu';
+khufu.userData = {
+    title: 'The Great Pyramid of Khufu',
+    text: 'The biggest pyramid of the pyramids of Giza. Cosidered one of the ancient wonders of the world, the great pyramid of khufu was the tallest building in the world for around 3800 years.'
+};
+
+khafre.name = 'Khafre';
+khafre.userData = {
+    title: 'The Pyramid of Khafre',
+    text: 'Although it is the middle-sized pyramid among the three pyramids of Giza, the pyramid of Khafre usually appears as the biggest/heighest of the three pyramids from a distance.'
+};
+
+menkaure.name = "Menkaure";
+menkaure.userData = {
+    title: 'The Pyramid of Menkaure',
+    text: 'The smallest of the pyramids of giza, the pyramid of Menkaure is was built by king Menkoure (the grandson of king Khufu, the owner of the great pyramid'
+};
+
+const raycaster = new THREE.Raycaster();
+const mouse = new THREE.Vector2();
+const clickablePyramids = [khufu, khafre, menkaure];
+
+window.addEventListener('click', (event) => {
+mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
+mouse.y = (event.clientY / window.innerHeight) * 2 + 1;
+raycaster.setFromCamera(mouse, camera);
+const intersects = raycaster.intersectObjects(clickablePyramids);
+
+if (intersects.length > 0) {
+    const clicked = intersects[0].object;
+    showInfoPanel(clicked.userData);
+}
+
+});
+
+const infoPanel = document.getElementById('info');
+const infoTitle = document.getElementById('info-title');
+const infoText = document.getElementById('info-text');
+const closeBtn = document.getElementById('close-btn');
+
+function showInfoPanel(data) {
+    infoTitle.textContent = data.title;
+    infoText.textContent = data.text;
+    infoPanel.classList.remove('hidden');
+
+}
+
+closeBtn.addEventListener('click', () => {
+    infoPanel.classList.add('hidden');
+});
+
+
+
+
 
 function animate() {
     requestAnimationFrame(animate);
