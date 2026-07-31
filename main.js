@@ -23,7 +23,13 @@ function animate() {
 animate();
 
 const khufuGeomertry = new THREE.ConeGeometry(4,5,4)
-const khufuMaterial = new THREE.MeshBasicMaterial({color: 0xc2a878});
+const khufuMaterial = new THREE.MeshStandardMaterial({color: 0xc2a878});
 const khufu = new THREE.Mesh(khufuGeomertry, khufuMaterial);
 khufu.position.set(0, 2.5, 0)
 scene.add(khufu)
+
+const ambientlight = new THREE.AmbientLight(0xffffff, 0.4);
+scene.add(ambientlight);
+
+const sunlight = new THREE.Directedlight(0xfff2d9, 1.2);
+sunlight.position.set(10, 15, 10);
