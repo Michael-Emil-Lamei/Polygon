@@ -15,12 +15,7 @@ const renderer = new THREE.WebGLRenderer({antialias: true});
 renderer.setSize(window.innerWidth, window.innerHeight);
 document.getElementById('pyramid').appendChild(renderer.domElement);
 
-function animate() {
-    requestAnimationFrame(animate);
-    renderer.render(scene, camera);
 
-}
-animate();
 
 const khufuGeomertry = new THREE.ConeGeometry(4,5,4)
 const khufuMaterial = new THREE.MeshStandardMaterial({color: 0xc2a878});
@@ -46,3 +41,22 @@ scene.add(ambientlight);
 const sunlight = new THREE.Directedlight(0xfff2d9, 1.2);
 sunlight.position.set(10, 15, 10);
 scene.add(sunlight);
+
+const textureloader = new THREE.TextureLoader();
+const sandtexture = textureloader.load('sandy_gravel_02_diff_4k');
+sandtexture.wrapS = THREE.RepeatWrapping;
+sandtexture.wrapT = THREE.RepeatWrapping;
+sandtexture.repeat.set(10, 10);
+
+const landgeometry = new THREE.LandGeometry(60, 60);
+const landmaterial = new THREE.LandMaterial({ map: sandtexture });
+const land = new THREE.Mesh(landgeometry, landmaterial);
+land.rotation.x = -Math.PI / 2;
+scene.add(land);
+
+function animate() {
+    requestAnimationFrame(animate);
+    renderer.render(scene, camera);
+
+}
+animate();
