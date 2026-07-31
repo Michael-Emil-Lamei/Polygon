@@ -21,3 +21,9 @@ function animate() {
 
 }
 animate();
+
+const khufuGeomertry = new THREE.ConeGeometry(4,5,4)
+const khufuMaterial = new THREE.MeshBasicMaterial({color: 0xc2a878});
+const khufu = new THREE.Mesh(khufuGeomertry, khufuMaterial);
+khufu.position.set(0, 2.5, 0)
+scene.add(khufu)
