@@ -30,30 +30,30 @@ const khafre = new THREE.Mesh(khafreGeomertry, khafreMaterial);
 khafre.position.set(-9, 2.325, 2);
 scene.add(khafre);
 
-const menkaureGeomertry = new THREE.ConeGeometry(3.7,4.65,4)
+const menkaureGeomertry = new THREE.ConeGeometry(1.8,2.25,4)
 const menkaureMaterial = new THREE.MeshStandardMaterial({color: 0xaf8f66});
 const menkaure = new THREE.Mesh(menkaureGeomertry, menkaureMaterial);
-menkaure.position.set(-9, 2.325, 2);
+menkaure.position.set(8, 1.125, -1);
 scene.add(menkaure);
 
 const ambientlight = new THREE.AmbientLight(0xffffff, 0.4);
 scene.add(ambientlight);
 
-const sunlight = new THREE.Directedlight(0xfff2d9, 1.2);
+const sunlight = new THREE.Directionallight(0xfff2d9, 1.2);
 sunlight.position.set(10, 15, 10);
 scene.add(sunlight);
 
 const textureloader = new THREE.TextureLoader();
-const sandtexture = textureloader.load('sandy_gravel_02_diff_4k');
+const sandtexture = textureloader.load("sandy_gravel_02_diff_4k.jpg");
 sandtexture.wrapS = THREE.RepeatWrapping;
 sandtexture.wrapT = THREE.RepeatWrapping;
 sandtexture.repeat.set(10, 10);
 
-const landgeometry = new THREE.LandGeometry(60, 60);
-const landmaterial = new THREE.LandMaterial({ map: sandtexture });
-const land = new THREE.Mesh(landgeometry, landmaterial);
-land.rotation.x = -Math.PI / 2;
-scene.add(land);
+const groundgeometry = new THREE.GroundGeometry(60, 60);
+const groundmaterial = new THREE.GroundMaterial({ map: sandtexture });
+const ground = new THREE.Mesh(groundgeometry, groundmaterial);
+ground.rotation.x = -Math.PI / 2;
+scene.add(ground);
 
 const control = new OrbitControls(camera, renderer.domElement);
 control.enableDamping = true;
