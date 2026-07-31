@@ -28,7 +28,7 @@ html, body {
     transform: translateY(-50%);
     background-color: rgba(20, 15, 10, 0.8);
     border: 1px solid #c9a15c;
-    border-radius: 20px;
+    border-radius: 5px;
     color: #f0e6d2;
     
 }

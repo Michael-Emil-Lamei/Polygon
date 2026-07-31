@@ -129,6 +129,32 @@ function startMusic() {
 window.addEventListener('click', startMusic, {once: true});
 
 
+function createSkyTexture() {
+const canvas = document.createElement('canvas');
+canvas.width = 2;
+canvas.height = 512;
+const ctx = canvas.getContext('2d');
+
+const gradient = ctx.createLinearGradient(0, 0, 0, 512);
+gradient.addColorStop(0, '#1b3a6b');
+gradient.addColorStop(0.5, '#e8935f');
+gradient.addColorStop(1, '#f4c98a');
+
+ctx.fillStyle = gradient;
+ctx.fillRect(0, 0, 2, 512);
+
+return new THREE.CanvasTexture(canvas);
+}
+
+const skyGeometry = new THREE.SphereGeometry(200, 32, 32);
+const skyMaterial = new THREE.MeshBasicMaterial({
+    map: createSkyTexture(),
+    side: THREE.BackSide
+});
+
+const sky = new THREE.Mesh(skyGeometry, skyMaterial);
+scene.add(sky);
+
 
 
 
